@@ -1,37 +1,41 @@
-import pandas as pd  # Importation de la bibliothèque pandas pour la manipulation des données
-import os  # Importation de la bibliothèque os pour l'interaction avec le système de fichiers
+import argparse
+import pandas as pd
 
-def consolidate_csv_files(directory):
-    # Cette fonction consolide tous les fichiers CSV dans le répertoire spécifié en un seul DataFrame pandas
+def consolider(input_files, output_file):
+    # Consolider plusieurs fichiers CSV en un seul
+    # Initialiser une liste pour stocker les DataFrames des fichiers lus
+    dataframes = []
+    
+    # Parcourir chaque fichier d'entrée
+    for input_file in input_files:
+        print(f"Lecture du fichier : {input_file}")
+        # Lire le fichier CSV et l'ajouter à la liste des DataFrames
+        df = pd.read_csv(input_file)
+        dataframes.append(df)
 
-    # Récupère la liste de tous les fichiers dans le répertoire spécifié qui se terminent par '.csv'
-    all_files = [f for f in os.listdir(directory) if f.endswith('.csv')]
+    # Combiner tous les DataFrames en un seul
+    # Utilise pd.concat pour fusionner les fichiers en ignorant les index originaux
+    result = pd.concat(dataframes, ignore_index=True)
     
-    # Initialise une liste vide pour stocker les DataFrames
-    all_dataframes = []
+    # Sauvegarder le DataFrame consolidé dans le fichier de sortie
+    print(f"Enregistrement du fichier consolidé dans : {output_file}")
+    result.to_csv(output_file, index=False)
 
-    # Pour chaque fichier dans la liste des fichiers CSV
-    for file in all_files:
-        # Lit le fichier CSV et le stocke dans un DataFrame
-        df = pd.read_csv(os.path.join(directory, file))
-        
-        # Ajoute le DataFrame à la liste des DataFrames
-        all_dataframes.append(df)
+def main():
+    # Définir un parseur d'arguments pour la ligne de commande
+    parser = argparse.ArgumentParser(description="Consolider plusieurs fichiers CSV en un fichier de sortie.")
     
-    # Concatène tous les DataFrames en un seul, en ignorant les index pour réindexer de 0 à n-1
-    consolidated_df = pd.concat(all_dataframes, ignore_index=True)
+    # Ajouter un argument pour les fichiers d'entrée (plusieurs fichiers acceptés)
+    parser.add_argument("--inputs", nargs='+', type=str, required=True, help="Chemins des fichiers CSV d'entrée.")
     
-    # Retourne le DataFrame consolidé
-    return consolidated_df
+    # Ajouter un argument pour le fichier de sortie
+    parser.add_argument("--output", type=str, required=True, help="Chemin du fichier de sortie.")
+
+    # Analyser les arguments de la ligne de commande
+    args = parser.parse_args()
+    
+    # Appeler la fonction de consolidation avec les arguments fournis
+    consolider(args.inputs, args.output)
 
 if __name__ == "__main__":
-    # Spécifie le répertoire contenant les fichiers CSV
-    directory = "../donnees"
-    
-    # Appelle la fonction pour consolider les fichiers CSV et stocke le résultat dans 'consolidated_df'
-    consolidated_df = consolidate_csv_files(directory)
-    
-    # Sauvegarde le DataFrame consolidé dans un nouveau fichier CSV
-    consolidated_df.to_csv(os.path.join(directory, 'consolidated_inventory.csv'), index=False)
-    
-    print("Consolidation terminée. Données sauvegardées dans 'consolidated_inventory.csv'.")
+    main()
