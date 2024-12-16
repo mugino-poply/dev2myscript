@@ -14,9 +14,9 @@ Ce projet est une application de gestion de produits permettant de consolider le
 ```
 myscript/
 ├── scripts/                # Contient les scripts principaux
-│   ├── cli_consolider.py   # Script pour consolider des fichiers CSV
-│   ├── cli_rapport.py      # Script pour générer des rapports
-│   ├── cli_recherches.py   # Script pour effectuer des recherches
+│   ├── consolider.py   # Script pour consolider des fichiers CSV
+│   ├── rapport.py      # Script pour générer des rapports
+│   ├── recherches.py   # Script pour effectuer des recherches
 ├── tests/                  # Contient les tests unitaires
 │   ├── test_consolider.py  # Tests pour cli_consolider.py
 │   ├── test_rapport.py     # Tests pour cli_rapport.py
@@ -45,7 +45,7 @@ Chaque script peut être exécuté depuis la ligne de commande avec des argument
 ### Consolidation de fichiers CSV
 
 ```bash
-python scripts/cli_consolider.py --inputs file1.csv file2.csv --output output.csv
+python scripts/consolider.py --inputs file1.csv file2.csv --output output.csv
 ```
 - **`--inputs`** : Liste des fichiers CSV d'entrée.
 - **`--output`** : Chemin du fichier de sortie consolidé.
@@ -53,14 +53,14 @@ python scripts/cli_consolider.py --inputs file1.csv file2.csv --output output.cs
 ### Génération de rapports
 
 ```bash
-python scripts/cli_rapport.py --rapport-type summary
+python scripts/rapport.py --rapport-type summary
 ```
 - **`--rapport-type`** : Type de rapport à générer (par exemple : `summary`, `detailed`, etc.).
 
 ### Recherches
 
 ```bash
-python scripts/cli_recherches.py --query "Votre requête ici"
+python scripts/recherches.py --query "Votre requête ici"
 ```
 - **`--query`** : Requête ou mot-clé pour la recherche.
 
