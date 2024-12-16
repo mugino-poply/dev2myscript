@@ -2,93 +2,76 @@
 
 Ce projet est une application de gestion de produits permettant de consolider les données de produits, de rechercher par catégorie et de générer des rapports.
 
-## Prérequis
-
-1. **Installer Python** :
-    - Téléchargez et installez Python à partir de [python.org](https://www.python.org/downloads/).
-    - Assurez-vous que Python est ajouté à votre variable PATH.
-
-    Pour vérifier l'installation de Python, exécutez :
-    ```bash
-    python --version
-    ```
-    ou
-    ```bash
-    python3 --version
-    ```
-
-2. **Installer les dépendances** :
-    - Créez un environnement virtuel et activez-le :
-        ```bash
-        python -m venv env
-        source env/bin/activate  
-        # Pour Windows : `env\Scripts\activate`
-        ```
-      ou
-        ```bash
-        python3 -m venv env
-        source env/bin/activate
-        # Pour Windows : `env\Scripts\activate`
-        ```
-
-    - Installez les dépendances à partir du fichier `necessaire.txt` :
-        ```bash
-        pip install -r necessaire.txt
-        ```
-
 ## Fonctionnalités
-- **Consolidation des données de produits** : Lecture de plusieurs fichiers CSV, fusion des données en un seul fichier.
-- **Recherche de produits par catégorie** : Recherche de produits spécifiques dans un fichier CSV par catégorie.
-- **Génération de rapports récapitulatifs** : Création de rapports récapitulatifs des produits avec des statistiques agrégées.
+
+- **Consolidation de fichiers CSV** : Combine plusieurs fichiers CSV en un seul fichier consolidé.
+- **Génération de rapports** : Crée des rapports basés sur des types spécifiés par l'utilisateur.
+- **Recherches automatisées** : Effectue des recherches en fonction de requêtes spécifiques.
+- **Tests unitaires** : Vérifie le bon fonctionnement des scripts à l'aide de `unittest`.
+
+## Structure du projet
+
+```
+myscript/
+├── scripts/                # Contient les scripts principaux
+│   ├── cli_consolider.py   # Script pour consolider des fichiers CSV
+│   ├── cli_rapport.py      # Script pour générer des rapports
+│   ├── cli_recherches.py   # Script pour effectuer des recherches
+├── tests/                  # Contient les tests unitaires
+│   ├── test_consolider.py  # Tests pour cli_consolider.py
+│   ├── test_rapport.py     # Tests pour cli_rapport.py
+│   ├── test_recherches.py  # Tests pour cli_recherches.py
+└── README.md               # Documentation du projet
+```
+
+## Installation
+
+1. Clonez le dépôt :
+   ```bash
+   git clone https://github.com/mugino-poply/dev2myscript.git
+   cd dev2myscript/myscript
+   ```
+2. Assurez-vous d'avoir Python 3.7 ou supérieur installé.
+
+3. Installez les dépendances nécessaires (si applicables) :
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 ## Utilisation
 
-1. **Consolidation des données** :
-    ```bash
-    python -m scripts.consolider input_file.csv output_file.csv
-    ```
-    ou
-    ```bash
-    python3 -m scripts.consolider input_file.csv output_file.csv
-    ```
-    - Consolidation des données de plusieurs fichiers CSV en un seul fichier consolidé.
+Chaque script peut être exécuté depuis la ligne de commande avec des arguments spécifiques :
 
-2. **Recherche de produits par catégorie** :
-    ```bash
-    python -m scripts.recherches input_file.csv "Catégorie 1"
-    ```
-    ou
-    ```bash
-    python3 -m scripts.recherches input_file.csv "Catégorie 1"
-    ```
-    - Recherche de produits spécifiques dans le fichier CSV par catégorie.
+### Consolidation de fichiers CSV
 
-3. **Génération de rapports récapitulatifs** :
-    ```bash
-    python -m scripts.rapport input_file.csv report_file.csv
-    ```
-    ou
-    ```bash
-    python3 -m scripts.rapport input_file.csv report_file.csv
-    ```
-    - Création de rapports récapitulatifs des produits avec des statistiques agrégées.
+```bash
+python scripts/cli_consolider.py --inputs file1.csv file2.csv --output output.csv
+```
+- **`--inputs`** : Liste des fichiers CSV d'entrée.
+- **`--output`** : Chemin du fichier de sortie consolidé.
+
+### Génération de rapports
+
+```bash
+python scripts/cli_rapport.py --rapport-type summary
+```
+- **`--rapport-type`** : Type de rapport à générer (par exemple : `summary`, `detailed`, etc.).
+
+### Recherches
+
+```bash
+python scripts/cli_recherches.py --query "Votre requête ici"
+```
+- **`--query`** : Requête ou mot-clé pour la recherche.
 
 ## Tests
 
-Les tests unitaires sont inclus pour vérifier le bon fonctionnement des différentes fonctionnalités du projet.
+Les tests unitaires pour chaque script sont disponibles dans le dossier `tests`. Pour exécuter tous les tests :
 
-### Exécution des tests
-
-Pour exécuter les tests, utilisez la commande suivante :
 ```bash
-python -m unittest discover tests
+python -m unittest discover -s tests -p "*.py"
 ```
-  ou
-  ```bash
-python3 -m unittest discover tests
-  ```
 
-
-## Contributeur:
+## Auteur:
 
 [Hippolyte Amory](https://github.com/mugino-poply)
