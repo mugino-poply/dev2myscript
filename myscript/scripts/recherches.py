@@ -3,7 +3,7 @@ import csv
 
 def effectuer_recherche(query):
     # Charger le fichier contenant les données produits
-    data_file = "donnees/output_file.csv"  # Spécifiez le chemin de votre fichier
+    data_file = "output_file.csv"  # Spécifiez le chemin de votre fichier
     try:
         with open(data_file, mode='r', encoding='utf-8') as file:
             reader = csv.DictReader(file)
