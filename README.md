@@ -45,7 +45,7 @@ Chaque script peut être exécuté depuis la ligne de commande avec des argument
 ### Consolidation de fichiers CSV
 
 ```bash
-python scripts/consolider.py --inputs file1.csv file2.csv --output output.csv
+python scripts/consolider.py --inputs file1.csv file2.csv --output consolidate.csv
 ```
 - **`--inputs`** : Liste des fichiers CSV d'entrée.
 - **`--output`** : Chemin du fichier de sortie consolidé.
@@ -53,9 +53,8 @@ python scripts/consolider.py --inputs file1.csv file2.csv --output output.csv
 ### Génération de rapports
 
 ```bash
-python scripts/rapport.py --rapport-type summary
+python scripts/rapport.py [-h] --input consolidate.csv --output rapport.csv
 ```
-- **`--rapport-type`** : Type de rapport à générer (par exemple : `summary`, `detailed`, etc.).
 
 ### Recherches
 
