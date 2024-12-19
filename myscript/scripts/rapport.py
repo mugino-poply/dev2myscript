@@ -15,7 +15,7 @@ def generer_rapport(input_file, output_file):
             for row in reader:
                 categorie = row['Catégorie']
                 quantite = int(row['Quantité'])
-                prix_unitaire = float(row['Prix Unitaire'])
+                prix_unitaire = float(row['Prix unitaire'])
 
                 categories[categorie]['quantite'] += quantite
                 categories[categorie]['prix_total'] += quantite * prix_unitaire
